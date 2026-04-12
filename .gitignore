@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dependencies
 node_modules/
 
@@ -27,3 +28,21 @@ logs/
 # Temporary
 *.tmp
 *.temp
+=======
+# === Ignore everything by default ===
+*
+!.gitignore
+!README.md
+!*assignments/
+!*exams/
+
+# === Allow only assignment folders ===
+!*assignments/*/
+!*exams/*/
+
+# === Allow code folders and contents ===
+!*assignments/*/code/
+!*assignments/*/code/**
+!*exams/**/code/
+!*exams/**/code/**
+>>>>>>> c2a6c70 (First commit)
