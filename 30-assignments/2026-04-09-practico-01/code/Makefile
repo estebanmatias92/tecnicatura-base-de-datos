@@ -1,5 +1,8 @@
 .PHONY: help up down restart mysql status logs seed test-joins test-exists test-null clean
 
+include .env
+export
+
 help:
 	@echo "Available commands:"
 	@echo "  make up         - Start MySQL container"

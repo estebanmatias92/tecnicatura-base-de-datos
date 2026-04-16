@@ -55,6 +55,9 @@ INSERT INTO games (title, genre, release_year, price) VALUES
 ('Doom', 'Shooter', 1993, 29.99),
 ('Minecraft', 'Sandbox', 2011, 26.99);
 
+-- Eve: fake game entry to be deleted (orphan record for NULL demo)
+INSERT INTO games (id, title, genre, release_year, price) VALUES (99, 'Deleted Game', 'Test', 2000, 0.00);
+
 -- User_Games (intentional gaps for JOIN demonstration)
 -- Alice: 3 games
 INSERT INTO user_games (user_id, game_id, hours_played) VALUES
