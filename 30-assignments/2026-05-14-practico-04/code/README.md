@@ -1,14 +1,23 @@
-# ISFT 151 - Base de Datos: Guía TP N° 3
+# ISFT 151 - Base de Datos: Laboratorio 04 - Modelo Relacional Adaptativo
 
 ## Descripción
 
-Resolución automatizada de la Guía de Trabajos Prácticos N° 3 de la materia Base de Datos. El proyecto implementa la creación, manipulación y consulta de la base de datos `medical_clinic_db` mediante scripts SQL segregados por responsabilidad en el ciclo de vida de los datos.
+Implementación del patrón **Dictionary-Driven Entity-Attribute-Value (DDEAV)**
+combinado con **Class-Table Inheritance (CTI)** (Fowler, *Patterns of Enterprise
+Application Architecture*) y soft-delete lógico, aplicado al dominio educativo.
 
-La ejecución se gestiona a través de una arquitectura basada en contenedores (Docker) y orquestada con GNU Make para garantizar un entorno reproducible, aislado y facilitar la captura secuencial de las salidas estándar (stdout).
+El modelo permite que los atributos de entidades como `Course`, `Student` y
+`Teacher` evolucionen ante cambios regulatorios (ej: nuevas modalidades de
+cursada, programas de becas, ajustes curriculares) **sin necesidad de ALTER
+TABLE** — todo se resuelve insertando datos en catálogos (`OptionGroup`,
+`OptionValue`) y asignándolos mediante tablas puente (`EntityUniqueOption`,
+`EntityMultipleOption`).
+
+La ejecución se gestiona a través de una arquitectura basada en contenedores
+(Docker) y orquestada con GNU Make para garantizar un entorno reproducible y
+aislado.
 
 ## Requisitos Previos
-
-Para ejecutar este proyecto, es necesario contar con las siguientes herramientas instaladas en el sistema anfitrión:
 
 * [Docker Engine](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
@@ -18,77 +27,80 @@ Para ejecutar este proyecto, es necesario contar con las siguientes herramientas
 
 ```text
 .
-├── docker-compose.yaml     # Definición del servicio MySQL 8.0
-├── Makefile                # Orquestador de comandos de ejecución
+├── docker-compose.yaml     # Servicio MySQL 8.0
+├── Makefile                # Orquestador de scripts
 └── sql/
-    ├── 01_setup.sql        # DDL/DCL: Creación de BD, usuario (clinic_admin) y permisos
-    ├── 02_schema.sql       # DDL: Definición de tablas, relaciones y restricciones
-    ├── 03_seed.sql         # DML: Población inicial de pacientes, médicos, citas y tratamientos
-    └── 04_queries.sql      # DQL: Consultas de selección y filtrado relacional
-
+    ├── 01_setup.sql        # DCL: Creación de DB (academic_ddeav_db) y usuario
+    ├── 02_schema.sql       # DDL: CTI (Entity, Student, Course, Teacher) + DDEAV
+    ├── 03_seed.sql         # DML: Población inicial (escenario 2009)
+    ├── 04_alta_opcion.sql  # DML: Prototipo — alta de nueva opción (Consigna 2)
+    └── 05_queries.sql      # DQL: Consultas de demostración
 ```
 
 ## Flujo de Ejecución
 
 ### 1. Inicializar la infraestructura
 
-Levantar el contenedor de MySQL en segundo plano.
-
 ```bash
 docker compose up -d
-
 ```
 
-*Nota: Aguardar aproximadamente 10-15 segundos hasta que el estado del contenedor figure como `healthy` antes de proceder al siguiente paso.*
+*Nota: Aguardar aproximadamente 10-15 segundos hasta que el estado del
+contenedor figure como `healthy` antes de proceder.*
 
-### 2. Ejecución secuencial de los ejercicios
+### 2. Ejecución secuencial
 
-Los siguientes comandos inyectan los scripts SQL directamente al contenedor (`mysql_db`) y renderizan la salida en formato tabular para su verificación.
+* **Setup** — Creación de la base de datos y credenciales:
 
-* **Ejercicio 1:** Creación de la base de datos y configuración de credenciales.
+  ```bash
+  make setup
+  ```
 
-```bash
-make setup
+* **Schema** — Tablas CTI (Entity, Student, Course, Teacher) + DDEAV
+  (OptionGroup, OptionValue, ValidOption, EntityUniqueOption,
+  EntityMultipleOption):
 
-```
+  ```bash
+  make schema
+  ```
 
-* **Ejercicio 2:** Creación de la estructura relacional (Tablas `Patients`, `Doctors`, `Appointments` y `Treatments`).
+* **Seed** — Población inicial: entidades educativas y catálogo con modalidad
+  "Presencialidad Plena":
 
-```bash
-make schema
+  ```bash
+  make seed
+  ```
 
-```
+* **Alta de opción (prototipo)** — Registro de "Propuesta Pedagógica Combinada"
+  y asignación a un curso existente:
 
-* **Ejercicio 3:** Inserción de los registros iniciales definidos en la guía.
+  ```bash
+  make alta
+  ```
 
-```bash
-make seed
+* **Consultas** — Demostración de recuperación de datos desde el modelo DDEAV:
 
-```
+  ```bash
+  make queries
+  ```
 
-* **Ejercicio 4:** Ejecución de las sentencias de recuperación y filtrado de datos.
-
-```bash
-make queries
-
-```
-
-*Alternativa:* Se puede ejecutar la suite de scripts completa de forma secuencial utilizando el comando unificado:
+*Alternativa:* Ejecutar la suite completa de forma secuencial:
 
 ```bash
 make all
-
 ```
 
 ## Limpieza del Entorno
 
-Una vez finalizada la tarea y capturadas las evidencias correspondientes, se debe destruir el contenedor y el volumen persistente (`mysql_data`) para mantener el sistema anfitrión limpio:
+Una vez finalizada la tarea y capturadas las evidencias correspondientes:
 
 ```bash
 docker compose down -v
-
 ```
 
-```
+## Referencias
 
-```
+- **Fowler, M. (2003)**. *Patterns of Enterprise Application Architecture*.
+  Addison-Wesley. — Patrón Class-Table Inheritance (CTI).
+- **Entity–Attribute–Value model** — Wikipedia.
+  [enlace](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model)
