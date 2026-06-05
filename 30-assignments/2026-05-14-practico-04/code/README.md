@@ -17,6 +17,170 @@ La ejecución se gestiona a través de una arquitectura basada en contenedores
 (Docker) y orquestada con GNU Make para garantizar un entorno reproducible y
 aislado.
 
+### Modelo Dictionary-Driven EAV (DDEAV)
+
+```plantuml
+@startuml
+hide circle
+skinparam linetype ortho
+
+' --- Core Entity ---
+entity "Entity" {
+  * ID : int <<PK>>
+  --
+  Active : bit <<default(0)>>
+  EntityType : varchar
+}
+
+' --- DDEAV tables ---
+entity "OptionGroup" {
+  * ID : int <<PK>>
+  --
+  Active : tinyint <<default(1)>>
+  Name : varchar
+}
+
+entity "OptionValue" {
+  * ID : int <<PK>>
+  --
+  Active : tinyint <<default(1)>>
+  Value : varchar
+}
+
+entity "ValidOption" {
+  * ID : int <<PK>>
+  --
+  OptionValueID : int <<FK>> <<UNIQUE1>>
+  OptionGroupID : int <<FK>> <<UNIQUE1>>
+}
+
+entity "EntityUniqueOption" {
+  EntityID : int <<FK1>> <<UNIQUE1>>
+  ValidOptionID : int <<FK2>>
+  OptionGroupID : int <<FK2>> <<UNIQUE1>>
+}
+
+entity "EntityMultipleOption" {
+  EntityID : int <<FK>> <<UNIQUE1>>
+  ValidOptionID : int <<FK>> <<UNIQUE1>>
+}
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+Entity ||--o{ EntityUniqueOption : "1 to n"
+Entity ||--o{ EntityMultipleOption : "1 to n"
+
+OptionGroup ||--o{ ValidOption : "1 to n"
+OptionGroup ||--o{ EntityUniqueOption : "1 to n"
+OptionValue ||--o{ ValidOption : "1 to n"
+ValidOption ||--o{ EntityUniqueOption : "1 to n"
+ValidOption ||--o{ EntityMultipleOption : "1 to n"
+
+@enduml
+```
+
+### DDEAV + Class-Table Inheritance (CTI)
+
+```plantuml
+@startuml
+hide circle
+skinparam linetype ortho
+
+' --- Core Entity ---
+entity "Entity" {
+  * ID : int <<PK>>
+  --
+  Active : bit <<default(0)>>
+}
+
+' --- Subtypes (concrete entities) ---
+entity "Student" {
+  * ID : int <<PK>>
+  --
+  EntityID : int <<FK>> <<unique>>
+  FullName : varchar
+  Email : varchar
+  Phone : varchar
+}
+
+entity "Course" {
+  * ID : int <<PK>>
+  --
+  EntityID : int <<FK>> <<unique>>
+  Name : varchar
+  StartDate : date
+  EndDate : date
+  MaxCapacity : int
+}
+
+entity "Teacher" {
+  * ID : int <<PK>>
+  --
+  EntityID : int <<FK>> <<unique>>
+  FullName : varchar
+  Email : varchar
+  Specialization : varchar
+}
+
+' --- DDEAV tables ---
+entity "OptionGroup" {
+  * ID : int <<PK>>
+  --
+  Active : tinyint <<default(1)>>
+  Name : varchar
+}
+
+entity "OptionValue" {
+  * ID : int <<PK>>
+  --
+  Active : tinyint <<default(1)>>
+  Value : varchar
+}
+
+entity "ValidOption" {
+  * ID : int <<PK>>
+  --
+  OptionValueID : int <<FK>> <<UNIQUE1>>
+  OptionGroupID : int <<FK>> <<UNIQUE1>>
+}
+
+entity "EntityUniqueOption" {
+  EntityID : int <<FK1>> <<UNIQUE1>>
+  ValidOptionID : int <<FK2>>
+  OptionGroupID : int <<FK2>> <<UNIQUE1>>
+}
+
+entity "EntityMultipleOption" {
+  EntityID : int <<FK>> <<UNIQUE1>>
+  ValidOptionID : int <<FK>> <<UNIQUE1>>
+}
+
+' ========================================
+' RELATIONSHIPS
+' ========================================
+
+' --- CTI: Subtypes ---
+Student |o--|| Entity : "Student.EntityID = Entity.ID"
+Course |o--|| Entity : "Course.EntityID = Entity.ID"
+Teacher |o--|| Entity : "Teacher.EntityID = Entity.ID"
+
+' --- DDEAV ---
+Entity ||--o{ EntityUniqueOption : "1 to n"
+Entity ||--o{ EntityMultipleOption : "1 to n"
+
+OptionGroup ||--o{ ValidOption : "1 to n"
+OptionGroup ||--o{ EntityUniqueOption : "1 to n"
+
+OptionValue ||--o{ ValidOption : "1 to n"
+
+ValidOption ||--o{ EntityUniqueOption : "1 to n"
+ValidOption ||--o{ EntityMultipleOption : "1 to n"
+
+@enduml
+```
+
 ## Requisitos Previos
 
 * [Docker Engine](https://docs.docker.com/engine/install/)
