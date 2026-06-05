@@ -185,7 +185,7 @@ ValidOption ||--o{ EntityMultipleOption : "1 to n"
 ```
 -->
 
-![Dictionary-Driven Entity-Attribute-Value model + Class-Table Inheritance pattern ](./_assets/dictionary-driven-entity-attribute-value-model.png)
+![Dictionary-Driven Entity-Attribute-Value model + Class-Table Inheritance pattern ](./_assets/ddeav-plus-class-table-inheritance-pattern.png)
 
 ## Requisitos Previos
 
