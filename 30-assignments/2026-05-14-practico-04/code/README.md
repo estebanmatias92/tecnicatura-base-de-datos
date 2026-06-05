@@ -82,7 +82,7 @@ ValidOption ||--o{ EntityMultipleOption : "1 to n"
 ```
 -->
 
-![[dictionary-driven-entity-attribute-value-model.png]]
+![Dictionary-Driven Entity-Attribute-Value model](dictionary-driven-entity-attribute-value-model.png)
 
 ### DDEAV + Class-Table Inheritance (CTI)
 <!--
@@ -185,7 +185,7 @@ ValidOption ||--o{ EntityMultipleOption : "1 to n"
 ```
 -->
 
-![[ddeav-plus-class-table-inheritance-model.png]]
+![Dictionary-Driven Entity-Attribute-Value model + Class-Table Inheritance pattern ](ddeav-plus-class-table-inheritance-model.png)
 
 ## Requisitos Previos
 
