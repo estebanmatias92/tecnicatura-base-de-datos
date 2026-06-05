@@ -18,7 +18,7 @@ La ejecución se gestiona a través de una arquitectura basada en contenedores
 aislado.
 
 ### Modelo Dictionary-Driven EAV (DDEAV)
-
+<!--
 ```plantuml
 @startuml
 hide circle
@@ -80,9 +80,12 @@ ValidOption ||--o{ EntityMultipleOption : "1 to n"
 
 @enduml
 ```
+-->
+
+![[dictionary-driven-entity-attribute-value-model.png]]
 
 ### DDEAV + Class-Table Inheritance (CTI)
-
+<!--
 ```plantuml
 @startuml
 hide circle
@@ -180,6 +183,9 @@ ValidOption ||--o{ EntityMultipleOption : "1 to n"
 
 @enduml
 ```
+-->
+
+![[ddeav-plus-class-table-inheritance-model.png]]
 
 ## Requisitos Previos
 
