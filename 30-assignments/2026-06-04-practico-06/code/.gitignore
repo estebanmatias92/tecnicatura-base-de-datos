@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+.direnv/
+chroma_data/
+*.egg-info/
+dist/
