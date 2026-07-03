@@ -1,0 +1,671 @@
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> cat compose.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> cat compose.yaml
+services:
+  mariadb:
+    image: 'mariadb:10.5'
+    restart: 'always'
+    ports:
+      - '3307:3307'
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    links:
+      - mariadb:test
+    restart: always
+────────────────────────────────────────────────────────────────────────────────
+> cat compose.yaml
+services:
+  mariadb:
+    image: 'mariadb:10.5'
+    restart: 'always'
+    ports:
+      - '3307:3307'
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    links:
+      - mariadb:test
+    restart: always
+────────────────────────────────────────────────────────────────────────────────
+> cat compose.yaml
+services:
+  mariadb:
+    image: 'mariadb:10.5'
+    restart: 'always'
+    ports:
+      - '3307:3307'
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    links:
+      - mariadb:test
+    restart: always
+────────────────────────────────────────────────────────────────────────────────
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+>
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+> docker compose ps
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+> docker compose ps
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+> docker compose ps
+NAME             IMAGE          COMMAND                  SERVICE   CREATED
+     STATUS              PORTS
+code-adminer-1   adminer        "entrypoint.sh docke…"   adminer   About a minute a
+go   Up 43 seconds       0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+code-mariadb-1   mariadb:10.5   "docker-entrypoint.s…"   mariadb   About a minute a
+go   Up About a minute   3306/tcp, 0.0.0.0:3307->3307/tcp, [::]:3307->3307/tcp
+>
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+> docker compose ps
+NAME             IMAGE          COMMAND                  SERVICE   CREATED
+     STATUS              PORTS
+code-adminer-1   adminer        "entrypoint.sh docke…"   adminer   About a minute a
+go   Up 43 seconds       0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+code-mariadb-1   mariadb:10.5   "docker-entrypoint.s…"   mariadb   About a minute a
+go   Up About a minute   3306/tcp, 0.0.0.0:3307->3307/tcp, [::]:3307->3307/tcp
+> curl -s http://localhost:8080 | head -30
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+> docker compose ps
+NAME             IMAGE          COMMAND                  SERVICE   CREATED
+     STATUS              PORTS
+code-adminer-1   adminer        "entrypoint.sh docke…"   adminer   About a minute a
+go   Up 43 seconds       0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+code-mariadb-1   mariadb:10.5   "docker-entrypoint.s…"   mariadb   About a minute a
+go   Up About a minute   3306/tcp, 0.0.0.0:3307->3307/tcp, [::]:3307->3307/tcp
+> curl -s http://localhost:8080 | head -30
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> docker compose pull
+[+] pull 2/2
+ ✔ Image mariadb:10.5 Pulled                                                   2.5s
+ ✔ Image adminer      Pulled                                                   2.5s
+> docker compose up -d
+[+] up 2/2
+ ✔ Container code-mariadb-1 Running                                            0.0s
+ ✔ Container code-adminer-1 Running                                            0.0s
+> docker compose ps
+NAME             IMAGE          COMMAND                  SERVICE   CREATED
+     STATUS              PORTS
+code-adminer-1   adminer        "entrypoint.sh docke…"   adminer   About a minute a
+go   Up 43 seconds       0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+code-mariadb-1   mariadb:10.5   "docker-entrypoint.s…"   mariadb   About a minute a
+go   Up About a minute   3306/tcp, 0.0.0.0:3307->3307/tcp, [::]:3307->3307/tcp
+> curl -s http://localhost:8080 | head -30
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex">
+────────────────────────────────────────────────────────────────────────────────
