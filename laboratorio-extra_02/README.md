@@ -15,13 +15,6 @@
 
 **Demostración en terminal:** ![▶️ Ver GIF](wordpress/demo.gif)
 
-| Captura | Descripción |
-|---|---|
-| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-41-11.png) | Registro Admin |
-| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-41-42.png) | Panel de Administración |
-| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-42-20.png) | Página Web |
-| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-56-53.png) | Shell - DB Query |
-
 ```bash
 cd wordpress
 docker compose up -d
@@ -29,26 +22,18 @@ docker compose ps
 curl http://localhost:8080
 ```
 
+| Captura                                                            | Descripción             |
+| ------------------------------------------------------------------ | ----------------------- |
+| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-41-11.png) | Registro Admin          |
+| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-41-42.png) | Panel de Administración |
+| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-42-20.png) | Página Web              |
+| ![screenshot](wordpress/assets/screenshot-2026-07-04_04-56-53.png) | Shell - DB Query        |
+
 ---
 
 ## Stack ERP — Odoo + PostgreSQL
 
 **Demostración en terminal:** ![▶️ Ver GIF](odoo/demo.gif)
-
-| Captura | Descripción |
-|---|---|
-| ![screenshot](odoo/assets/screenshot-2026-07-04_06-58-30.png) | Registro Admin |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_06-59-59.png) | Login Admin |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-00-44.png) | Panel de Administración |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-03-54.png) | Activación - Addon Web Page |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-05-08.png) | Configuracion Guiada - Web Page + Ecommerce |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-05-27.png) | Configuracion Guiada - Web Page Theme |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-10-38.png) | Web Page - Home |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-11-45.png) | Ecommerce - Admin - Products |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-11-56.png) | Ecommerce - Admin - Clients |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-12-12.png) | Web Page - Admin - Products |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-12-20.png) | Web Page - Admin - Clients |
-| ![screenshot](odoo/assets/screenshot-2026-07-04_07-12-51.png) | Web Page - Tienda Ecommerce |
 
 ```bash
 cd odoo
@@ -56,6 +41,21 @@ docker compose up -d
 docker compose ps
 curl http://localhost:8069
 ```
+
+| Captura                                                       | Descripción                                 |
+| ------------------------------------------------------------- | ------------------------------------------- |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_06-58-30.png) | Registro Admin                              |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_06-59-59.png) | Login Admin                                 |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-00-44.png) | Panel de Administración                     |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-03-54.png) | Activación - Addon Web Page                 |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-05-08.png) | Configuracion Guiada - Web Page + Ecommerce |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-05-27.png) | Configuracion Guiada - Web Page Theme       |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-10-38.png) | Web Page - Home                             |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-11-45.png) | Ecommerce - Admin - Products                |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-11-56.png) | Ecommerce - Admin - Clients                 |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-12-12.png) | Web Page - Admin - Products                 |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-12-20.png) | Web Page - Admin - Clients                  |
+| ![screenshot](odoo/assets/screenshot-2026-07-04_07-12-51.png) | Web Page - Tienda Ecommerce                 |
 
 ---
 
