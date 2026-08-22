@@ -24,6 +24,8 @@ curl http://localhost:8080
 
 **Demostración en terminal:** ![▶️ Ver GIF](wordpress/demo.gif)
 
+**Primer login y config**
+
 | Captura                                                            | Descripción             |
 | ------------------------------------------------------------------ | ----------------------- |
 | ![screenshot](wordpress/assets/screenshot-2026-07-04_04-41-11.png) | Registro Admin          |
@@ -45,6 +47,8 @@ curl http://localhost:8069
 ```
 
 **Demostración en terminal:** ![▶️ Ver GIF](odoo/demo.gif)
+
+**Primer login y config**
 
 | Captura                                                       | Descripción                                 |
 | ------------------------------------------------------------- | ------------------------------------------- |
