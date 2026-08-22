@@ -13,7 +13,7 @@
 
 ## Stack CMS — WordPress + MySQL
 
-**Demostración en terminal:** ![▶️ Ver GIF](wordpress/demo.gif)
+**Despliegue (local) y comprobación**
 
 ```bash
 cd wordpress
@@ -21,6 +21,8 @@ docker compose up -d
 docker compose ps
 curl http://localhost:8080
 ```
+
+**Demostración en terminal:** ![▶️ Ver GIF](wordpress/demo.gif)
 
 | Captura                                                            | Descripción             |
 | ------------------------------------------------------------------ | ----------------------- |
@@ -33,7 +35,7 @@ curl http://localhost:8080
 
 ## Stack ERP — Odoo + PostgreSQL
 
-**Demostración en terminal:** ![▶️ Ver GIF](odoo/demo.gif)
+**Despliegue (local) y comprobación**
 
 ```bash
 cd odoo
@@ -41,6 +43,8 @@ docker compose up -d
 docker compose ps
 curl http://localhost:8069
 ```
+
+**Demostración en terminal:** ![▶️ Ver GIF](odoo/demo.gif)
 
 | Captura                                                       | Descripción                                 |
 | ------------------------------------------------------------- | ------------------------------------------- |
