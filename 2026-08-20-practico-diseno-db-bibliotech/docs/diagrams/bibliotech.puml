@@ -1,0 +1,186 @@
+@startuml
+' Diagrama ER — Bibliotech v4 (Postgres, solo digital)
+' Nucleo 3FN + CTI + DDEAV acotado. Rol unico via user_has_unique_roles.
+hide circle
+skinparam linetype ortho
+
+package "RBAC · users y roles" as rbac {
+  entity "users" as users {
+    * id : bigint <<PK>>
+    --
+    * username : citext <<UQ>>
+    * password_hash : text
+    * created_at : timestamptz
+  }
+
+  entity "roles" as roles {
+    * id : bigint <<PK>>
+    --
+    * name : citext <<UQ>>
+    description : text
+  }
+
+  entity "user_has_unique_roles" as uniq {
+    * user_id : bigint <<PK/FK>>
+    --
+    * role_id : bigint <<FK>>
+    assigned_at : timestamptz
+  }
+
+  entity "user_has_many_roles" as many {
+    * user_id : bigint <<PK/FK>>
+    * role_id : bigint <<PK/FK>>
+    --
+    assigned_at : timestamptz
+  }
+
+  note right of many
+    stub expansión futura,
+    sin uso por la app
+  end note
+}
+
+package "Catalogo · recursos, subjects y categorias" as catalogo {
+  entity "resources" as res {
+    * id : bigint <<PK>>
+    --
+    * type : text <<libro/apunte_tesis/multimedia>>
+    * title : text
+    display_title : text
+    file_path : text
+    created_at : timestamptz
+  }
+
+  entity "book_details" as book {
+    * resource_id : bigint <<PK/FK>>
+    --
+    isbn : text <<UQ>>
+    publisher : text
+    pub_year : int
+  }
+
+  entity "thesis_details" as thesis {
+    * resource_id : bigint <<PK/FK>>
+    --
+    career : text
+    tutor : text
+  }
+
+  entity "media_details" as media {
+    * resource_id : bigint <<PK/FK>>
+    --
+    mime : text
+    duration_sec : int
+  }
+
+  entity "authors" as authors {
+    * id : bigint <<PK>>
+    --
+    * full_name : text
+  }
+
+  entity "resource_author" as ra {
+    * resource_id : bigint <<PK/FK>>
+    * author_id : bigint <<PK/FK>>
+  }
+
+  entity "subjects" as subjects {
+    * id : bigint <<PK>>
+    --
+    parent_id : bigint <<FK self>>
+    * name : citext
+    description : text
+  }
+
+  entity "subject_resource" as sr {
+    * subject_id : bigint <<PK/FK>>
+    * resource_id : bigint <<PK/FK>>
+    --
+    is_recommended : bool
+  }
+}
+
+package "Instituciones · carreras y homologacion" as instituciones {
+  entity "careers" as careers {
+    * id : bigint <<PK>>
+    --
+    * name : citext <<UQ>>
+    institution_type : text <<fomento/educativa>>
+  }
+
+  entity "course_subjects" as cs {
+    * id : bigint <<PK>>
+    --
+    * career_id : bigint <<FK>>
+    * subject_id : bigint <<FK>>
+    * name : citext
+  }
+
+  entity "resource_curriculum" as rc {
+    * resource_id : bigint <<PK/FK>>
+    * course_subject_id : bigint <<PK/FK>>
+    --
+    is_recommended : bool
+  }
+}
+
+package "DDEAV · metadatos discretos variables" as ddeav {
+  entity "option_groups" as og {
+    * id : bigint <<PK>>
+    --
+    * name : citext <<UQ>>
+  }
+
+  entity "option_values" as ov {
+    * id : bigint <<PK>>
+    --
+    * value : citext <<UQ>>
+  }
+
+  entity "valid_options" as vo {
+    * id : bigint <<PK>>
+    --
+    * option_value_id : bigint <<FK>>
+    * group_id : bigint <<FK>>
+  }
+
+  entity "entity_unique_options" as euo {
+    entity_id : bigint <<FK>> <<UQ1>>
+    valid_option_id : bigint <<FK>>
+    group_id : bigint <<FK>> <<UQ1>>
+  }
+
+  entity "entity_multiple_options" as emo {
+    entity_id : bigint <<FK>> <<UQ1>>
+    valid_option_id : bigint <<FK>> <<UQ1>>
+  }
+}
+
+users ||--o{ uniq
+roles ||--o{ uniq
+users ||--o{ many
+roles ||--o{ many
+
+res ||--o| book
+res ||--o| thesis
+res ||--o| media
+res ||--o{ ra
+authors ||--o{ ra
+
+subjects ||--o{ subjects : parent
+subjects ||--o{ sr
+res ||--o{ sr
+
+careers ||--o{ cs
+subjects ||--o{ cs
+res ||--o{ rc
+cs ||--o{ rc
+
+og ||--o{ vo
+ov ||--o{ vo
+res ||--o{ euo
+vo ||--o{ euo
+res ||--o{ emo
+vo ||--o{ emo
+
+@enduml
