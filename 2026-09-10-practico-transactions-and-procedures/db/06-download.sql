@@ -5,7 +5,7 @@
 -- Ejemplo:
 --   SELECT sp_log_download('est1', 1);   -- devuelve el id de la fila creada en log
 --   SELECT * FROM log WHERE action = 'DOWNLOAD';
--- Notas junior:
+-- Notas:
 --   - La función valida que existan TANTO el usuario COMO el documento antes de
 --     insertar; si alguno no existe falla con error claro y no deja filas a medias.
 --   - Retorna el id del log (BIGINT) por si el backend necesita referenciarlo.

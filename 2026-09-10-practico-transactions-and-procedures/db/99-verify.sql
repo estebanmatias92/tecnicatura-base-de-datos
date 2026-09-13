@@ -5,7 +5,7 @@
 --   ('Doc verify') se crea, se usa (uploads, downloads, rename, reportes) y se borra
 --   al final; el seed queda igual que antes. Los logs huérfanos que deja (SET NULL)
 --   son esperables por el diseño C6 y no afectan re-ejecuciones.
--- Nota junior: cada bloque -- C2/C3a/... indica qué consigna está probando; si algo
+-- Nota: cada bloque -- C2/C3a/... indica qué consigna está probando; si algo
 --   falla, el mensaje dice cuál (ej. 'C4 falló: sin ROLLBACK') para saber dónde mirar.
 
 DO $$

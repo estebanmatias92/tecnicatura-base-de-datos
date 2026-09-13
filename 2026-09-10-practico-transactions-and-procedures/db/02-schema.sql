@@ -10,7 +10,7 @@
 --   - log.user_id / log.document_id ON DELETE SET NULL: el historial se conserva, con las
 --     columnas del borrado en NULL (queda el registro de que la acción existió).
 --   - users_roles.role_id ON DELETE RESTRICT: no se puede borrar un rol que sigue asignado.
--- Notas junior:
+-- Notas:
 --   - CITEXT es un tipo "texto insensible a mayúsculas": 'Profa' y 'profa' se consideran
 --     el mismo username (requiere la extensión citext).
 --   - GENERATED ALWAYS AS IDENTITY es el sucesor moderno de SERIAL para IDs autoincrementales.

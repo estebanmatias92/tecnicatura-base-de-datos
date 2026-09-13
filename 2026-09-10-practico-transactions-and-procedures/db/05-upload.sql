@@ -5,7 +5,7 @@
 -- Ejemplo:
 --   SELECT sp_upload_document('profa', 'Apunte Nuevo', '/repo/nuevo.pdf');
 --   -- devuelve el id del documento creado; un SELECT a log muestra el 'UPLOAD'.
--- Notas junior:
+-- Notas:
 --   - En Postgres TODO el cuerpo de una función ya corre dentro de UNA transacción:
 --     si algo falla, se revierte todo lo que la función hizo. El bloque interno
 --     BEGIN ... EXCEPTION WHEN OTHERS sirve para interceptar el error y re-lanzarlo

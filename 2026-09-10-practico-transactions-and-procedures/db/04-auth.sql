@@ -8,7 +8,7 @@
 --   SELECT sp_get_password_hash('profa');          -- devuelve 'hash-profa'
 --   SELECT sp_has_role('profa', 'professor');      -- devuelve true
 --   SELECT sp_has_role('est1', 'professor');       -- devuelve false
--- Notas junior:
+-- Notas:
 --   - STABLE significa "no modifica la DB y con los mismos argumentos devuelve lo mismo
 --     dentro de una consulta": Postgres puede optimizar su uso. (Por contraste, las
 --     funciones de C4–C7 que INSERTAN/UPDATEAN no llevan STABLE.)

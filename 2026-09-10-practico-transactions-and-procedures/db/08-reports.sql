@@ -7,7 +7,7 @@
 -- Ejemplo:
 --   SELECT * FROM v_prolific_professors;          -- o SELECT sp_report_prolific_professors();
 --   SELECT * FROM v_popular_documents;            -- o SELECT sp_report_popular_documents();
--- Notas junior:
+-- Notas:
 --   - Cada reporte existe DOS veces a propósito: como VISTA (v_*) para consultarla
 --     directo, y como FUNCIÓN (sp_report_*) que la envuelve, porque la consigna pide
 --     "crear consultas (y encapsularlas en procedimientos)". Ambas devuelven lo mismo.

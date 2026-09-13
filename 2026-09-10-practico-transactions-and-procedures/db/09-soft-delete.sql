@@ -8,7 +8,7 @@
 --   SELECT * FROM v_active_users;                -- ya no lista a 'est3'
 --   SELECT sp_restore_user('est3');              -- revierte la baja
 --   SELECT sp_soft_delete_document(1);           -- da de baja un documento
--- Notas junior:
+-- Notas:
 --   - Esto NO reemplaza a C6: ambos conviven para comparar. C6 = DELETE real
 --     (didáctico); Fase 4 = UPDATE de deleted_at (productivo).
 --   - La app debería leer las vistas v_active_* en lugar de las tablas crudas, para

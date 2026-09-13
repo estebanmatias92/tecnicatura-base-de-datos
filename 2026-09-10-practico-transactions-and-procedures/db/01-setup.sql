@@ -5,7 +5,7 @@
 --   antes de enviar este archivo a psql, así la clave no queda hardcodeada en el repo.
 -- Idempotente: se puede re-ejecutar; si el rol o la DB ya existen, los deja como están
 --   (y refresca la clave del rol).
--- Nota junior: `\gexec` NO es SQL, es un meta-comando de psql: toma el texto que
+-- Nota: `\gexec` NO es SQL, es un meta-comando de psql: toma el texto que
 --   devuelve el SELECT anterior (un 'CREATE DATABASE ...') y lo ejecuta como si
 --   lo hubieras escrito a mano. Se usa porque `CREATE DATABASE` no admite `IF NOT EXISTS`
 --   con `WHERE` de la forma habitual; este truco lo emula.

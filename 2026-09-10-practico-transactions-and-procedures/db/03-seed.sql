@@ -8,7 +8,7 @@
 --   - 'profa' (professor) sube 2 documentos → aparece en el reporte C8a (>1 doc).
 --   - 'profb' (professor) sube 1 documento → NO aparece en C8a (sirve de contraejemplo).
 --   - 'est1/est2/est3' (student) existen para registrar descargas (C5) y alimentar C8b.
--- Nota junior: los password_hash son valores ficticios ('hash-...'). En un sistema real
+-- Nota: los password_hash son valores ficticios ('hash-...'). En un sistema real
 --   aquí iría el resultado de bcrypt/scrypt, nunca la clave en claro.
 
 INSERT INTO roles (name, description) VALUES

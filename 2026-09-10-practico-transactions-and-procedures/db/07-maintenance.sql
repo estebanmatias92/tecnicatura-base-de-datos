@@ -44,7 +44,7 @@ BEGIN
 END $$;
 
 -- Reemplaza todos los roles del usuario por uno nuevo, atómicamente.
--- Nota junior: DELETE + INSERT dentro de la misma función = misma transacción:
+-- Nota: DELETE + INSERT dentro de la misma función = misma transacción:
 -- si el INSERT fallara (rol inexistente ya validado arriba, pero por ejemplo),
 -- el DELETE también se revierte y el usuario no queda sin roles.
 CREATE OR REPLACE FUNCTION sp_set_user_role(
