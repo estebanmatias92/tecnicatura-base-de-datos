@@ -59,6 +59,10 @@ Base: [`2026-09-10-practico-transactions-and-procedures`](https://github.com/est
 | Verificación | smoke test C1–C8 (`VERIFY OK`) | [`db/99-verify.sql`](https://github.com/estebanmatias92/tecnicatura-base-de-datos/blob/main/2026-09-10-practico-transactions-and-procedures/db/99-verify.sql) (`make verify`) |
 | Entorno | contenedor Postgres 18 + interfaz | [`docker-compose.yaml`](https://github.com/estebanmatias92/tecnicatura-base-de-datos/blob/main/2026-09-10-practico-transactions-and-procedures/docker-compose.yaml), [`Makefile`](https://github.com/estebanmatias92/tecnicatura-base-de-datos/blob/main/2026-09-10-practico-transactions-and-procedures/Makefile) |
 
+## Documentación del sistema
+
+- [`docs/GLOSSARY.md`](https://github.com/estebanmatias92/tecnicatura-base-de-datos/blob/main/2026-09-10-practico-transactions-and-procedures/docs/GLOSSARY.md) — glosario PostgreSQL con equivalencias SQLite/MySQL (solo términos usados en `db/`)
+
 ## Decisiones
 
 * **C6 didáctico:** `documents.owner_id ON DELETE CASCADE`, `log.* ON DELETE SET NULL`. En producción se usaría soft-delete (Fase 4) para no distorsionar la auditoría.
