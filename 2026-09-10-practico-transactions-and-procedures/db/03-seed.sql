@@ -1,5 +1,15 @@
 -- C2: Carga — roles fundamentales + datos de prueba
--- Idempotente: ON CONFLICT DO NOTHING + WHERE NOT EXISTS.
+-- Qué: inserta los 3 roles de la consigna (admin, professor, student) y usuarios +
+--   documentos de ejemplo para poder probar las consignas 3 a 8 sin cargar nada a mano.
+-- Cómo se ejecuta: como bibliotech_user contra bibliotech, vía `make seed`.
+-- Idempotente: ON CONFLICT DO NOTHING / WHERE NOT EXISTS permiten re-ejecutarlo
+--   sin duplicar filas.
+-- Diseño del seed (a propósito, para que C8 tenga qué reportar):
+--   - 'profa' (professor) sube 2 documentos → aparece en el reporte C8a (>1 doc).
+--   - 'profb' (professor) sube 1 documento → NO aparece en C8a (sirve de contraejemplo).
+--   - 'est1/est2/est3' (student) existen para registrar descargas (C5) y alimentar C8b.
+-- Nota junior: los password_hash son valores ficticios ('hash-...'). En un sistema real
+--   aquí iría el resultado de bcrypt/scrypt, nunca la clave en claro.
 
 INSERT INTO roles (name, description) VALUES
     ('admin', 'Administra usuarios y roles'),

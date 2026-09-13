@@ -1,12 +1,17 @@
 -- 99: Verificación punta a punta (Fases 1-3)
--- Falla con EXCEPTION si alguna consigna no se cumple.
--- Uso: make verify
+-- Qué: smoke test que ejerce cada consigna y falla con EXCEPTION si alguna no se
+--   cumple. Termina con NOTICE 'VERIFY OK' si todo pasa.
+-- Cómo se usa: `make verify`. Re-ejecutable y autolimpiante: el documento de prueba
+--   ('Doc verify') se crea, se usa (uploads, downloads, rename, reportes) y se borra
+--   al final; el seed queda igual que antes. Los logs huérfanos que deja (SET NULL)
+--   son esperables por el diseño C6 y no afectan re-ejecuciones.
+-- Nota junior: cada bloque -- C2/C3a/... indica qué consigna está probando; si algo
+--   falla, el mensaje dice cuál (ej. 'C4 falló: sin ROLLBACK') para saber dónde mirar.
 
 DO $$
 DECLARE
     v_hash TEXT;
     v_doc BIGINT;
-    v_dl BIGINT;
     v_n INT;
 BEGIN
     -- C2: 3 roles base
@@ -29,7 +34,7 @@ BEGIN
         PERFORM sp_upload_document('profa', '   ', '/repo/bad.pdf');
         RAISE EXCEPTION 'C4 falló: debió rechazar displayname vacío';
     EXCEPTION WHEN OTHERS THEN
-        -- esperado
+        -- esperado: el SP rechazó el displayname y revirtió todo
     END;
     SELECT COUNT(*) INTO v_n FROM documents WHERE file_path = '/repo/bad.pdf';
     IF v_n <> 0 THEN RAISE EXCEPTION 'C4 falló: sin ROLLBACK'; END IF;
@@ -41,7 +46,7 @@ BEGIN
     SELECT COUNT(*) INTO v_n FROM log WHERE document_id = v_doc AND action = 'DOWNLOAD';
     IF v_n <> 3 THEN RAISE EXCEPTION 'C5 falló'; END IF;
 
-    -- C7: rename + cambio de rol (luego se revierte)
+    -- C7: rename + cambio de rol (luego se revierte para dejar el seed intacto)
     PERFORM sp_rename_document(v_doc, 'Doc verify v2');
     PERFORM sp_set_user_role('est1', 'professor');
     IF NOT sp_has_role('est1', 'professor') THEN RAISE EXCEPTION 'C7 falló'; END IF;
@@ -55,7 +60,7 @@ BEGIN
     SELECT COUNT(*) INTO v_n FROM v_popular_documents WHERE document_id = v_doc;
     IF v_n <> 1 THEN RAISE EXCEPTION 'C8b falló'; END IF;
 
-    -- Limpieza del doc de verificación (conserva logs por SET NULL)
+    -- Limpieza del doc de verificación (conserva logs por SET NULL, diseño C6)
     DELETE FROM documents WHERE id = v_doc;
 
     RAISE NOTICE 'VERIFY OK: C1-C8 cumplen';
