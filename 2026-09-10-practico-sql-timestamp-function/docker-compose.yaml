@@ -1,0 +1,24 @@
+name: patientsdb-p09
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: patientsdb_pg
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${HOST_PORT:-5433}:5432"
+    volumes:
+      - patientsdb_p09_pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  patientsdb_p09_pgdata:

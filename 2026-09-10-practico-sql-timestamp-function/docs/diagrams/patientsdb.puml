@@ -1,0 +1,23 @@
+@startuml
+' ER — patientsdb (logico, engine-agnostic)
+' Fuente: GUIA-TIB-02-PARTE-02-ISFT (patientsdb, tabla unica patients)
+' Target real: Postgres. Consigna original: MySQL. Ver docs/ER.md para mapeo fisico.
+hide circle
+skinparam linetype ortho
+
+entity "patients" as patients {
+  * id : INTEGER <<PK>> <<GENERATED>>
+  --
+  * first_name : VARCHAR(50)
+  * last_name : VARCHAR(50)
+  * birth_date : DATE
+  phone : VARCHAR(15) <<UQ>> <<NULL>>
+  email : VARCHAR(100) <<NULL>>
+}
+
+note right of patients
+  Entidad única, sin FKs
+  Ver ER.md para mapeo físico
+  MySQL vs Postgres
+end note
+@enduml
