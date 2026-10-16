@@ -1,0 +1,43 @@
+@startuml persistencia-repositorio
+title Patron Repositorio - persistencia por alcance
+!theme plain
+skinparam linetype ortho
+
+class Libro <<Entity>> {
+  - titulo : string
+  - autor : string
+  + getTitulo() : string
+  + getAutor() : string
+  + mostrar() : void
+}
+
+class Biblioteca <<Aggregate>> {
+  - nombre : string
+  - libros : Libro[*]
+  + agregarLibro(l : Libro) : void
+  + getNombre() : string
+  + getLibros() : Libro[*]
+  + mostrar() : void
+}
+
+class BibliotecaRepository <<Repository>> {
+  + serializar(b : Biblioteca) : string[*]
+  + guardar(b : Biblioteca) : void
+  + cargar(lineas : string[*]) : Biblioteca
+  note right : guardar() solo imprime\nserializacion por pantalla
+}
+
+class Main <<Client>> {
+}
+
+Biblioteca *-- Libro : contiene >
+BibliotecaRepository ..> Biblioteca : persiste por alcance >
+BibliotecaRepository ..> Libro : serializa >
+Main ..> BibliotecaRepository : usa >
+Main ..> Biblioteca : muestra >
+
+note bottom of BibliotecaRepository
+  Entidades sin Files/fstream:
+  SRP, sin Active Record
+end note
+@enduml
