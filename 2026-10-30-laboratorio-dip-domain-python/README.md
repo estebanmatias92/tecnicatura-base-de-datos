@@ -48,6 +48,17 @@ Ejecutar las pruebas:
 python -m pytest -v
 ```
 
+## Segunda iteración: implementación en memoria
+
+Se incorpora una implementación en memoria de la persistencia (`InMemoryCustomerRepository` / `InMemoryUnitOfWork` en `app/infrastructure/persistence/`), seleccionable por argumento:
+
+```bash
+python -m app.main memory   # sin base de datos
+python -m app.main          # por defecto: sqlite (customers.db)
+```
+
+El caso de uso `RegisterCustomer` no se modifica: depende de los contratos `Protocol` (DIP). Misma aplicación, dos adaptadores (arquitectura hexagonal).
+
 ## Recorrido sugerido para la clase
 
 1. Abrir `app/domain/` y comprobar que no hay imports de SQLAlchemy.
